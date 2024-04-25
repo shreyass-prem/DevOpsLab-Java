@@ -12,7 +12,26 @@ public class NameChecker {
      */
     public static boolean check(String input) {
         // TODO: implement
+        if (input.length() < 2 || input.length() > 40) {
+            return false;
+        }
 
-        return false;
+        if (input.charAt(0) == '-' || input.charAt(0) == '\'') {
+            return false;
+        }
+
+        for (int i = 0; i < input.length(); i++) {
+            if (!Character.isLetter(input.charAt(i)) && input.charAt(i) != '-' && input.charAt(i) != '\'') {
+                return false;
+            }
+
+            if (i > 0 && (input.charAt(i) == '-' || input.charAt(i) == '\'')) {
+                if (input.charAt(i - 1) == '-' || input.charAt(i - 1) == '\'') {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
